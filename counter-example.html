@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Notes App</title>
+    <style>
+        /* Styling for the entire body to center the content */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Styling for the main container */
+        #root {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Styling for the header */
+        h1 {
+            font-size: 2em;
+            color: #333;
+        }
+
+        /* Styling for the buttons */
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Different colors for different buttons */
+        button:first-of-type {
+            background-color: #4caf50;
+            /* Start button - green */
+            color: white;
+        }
+
+        button:nth-of-type(2) {
+            background-color: #f44336;
+            /* Stop button - red */
+            color: white;
+        }
+
+        button:last-of-type {
+            background-color: #2196f3;
+            /* Reset button - blue */
+            color: white;
+        }
+
+        /* Button hover effects */
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.js"></script>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function App() {
+            const [count, setCount] = useState(0);
+            const [intervalId, setIntervalId] = useState(null);
+
+            const handleStart = () => {
+                if (!intervalId) {
+                    const id = setInterval(() => {
+                        setCount(prevCount => prevCount + 1);
+                    }, 1000);
+                    setIntervalId(id);
+                }
+            };
+
+            const handleStop = () => {
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    setIntervalId(null);
+                }
+            };
+
+            const handleReset = () => {
+                handleStop();
+                setCount(0);
+            };
+
+            return (
+                <div>
+                    <h1>Count: {count}</h1>
+                    <br />
+                    <button onClick={handleStart}>Start</button>
+                    <button onClick={handleStop}>Stop</button>
+                    <button onClick={handleReset}>Reset</button>
+                </div>
+            );
+        }
+
+        const rootHandle = document.getElementById('root');
+        ReactDOM.render(<App />, rootHandle);
+    </script>
+</body>
+
+</html>
