@@ -84,10 +84,11 @@
             const handleStart = () => {
                 if (!intervalId) {
                     const id = setInterval(() => {
-                        setCount(prevCount => prevCount + 1);
-                    }, 1000);
-                    setIntervalId(id);
+                        setCount((preCount) => preCount + 1)
+                    }, 1000)
+                    setIntervalId(id)
                 }
+
             };
 
             const handleStop = () => {
@@ -104,6 +105,9 @@
 
             return (
                 <div>
+
+kjlrljglkrjj
+
                     <h1>Count: {count}</h1>
                     <br />
                     <button onClick={handleStart}>Start</button>
